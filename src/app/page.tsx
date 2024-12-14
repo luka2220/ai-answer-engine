@@ -32,8 +32,11 @@ export default function Home() {
         body: JSON.stringify({ message }),
       });
 
-      // TODO: Handle the response from the chat API to display the AI response in the UI
+      // TODO: Handle the response from the chat API to display the AI response in the UI      
+      const promptCompletion = await response.json()
+      console.log(promptCompletion.message);
 
+      // setMessages();
 
 
 
@@ -62,18 +65,16 @@ export default function Home() {
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`flex gap-4 mb-4 ${
-                msg.role === "ai"
-                  ? "justify-start"
-                  : "justify-end flex-row-reverse"
-              }`}
+              className={`flex gap-4 mb-4 ${msg.role === "ai"
+                ? "justify-start"
+                : "justify-end flex-row-reverse"
+                }`}
             >
               <div
-                className={`px-4 py-2 rounded-2xl max-w-[80%] ${
-                  msg.role === "ai"
-                    ? "bg-gray-800 border border-gray-700 text-gray-100"
-                    : "bg-cyan-600 text-white ml-auto"
-                }`}
+                className={`px-4 py-2 rounded-2xl max-w-[80%] ${msg.role === "ai"
+                  ? "bg-gray-800 border border-gray-700 text-gray-100"
+                  : "bg-cyan-600 text-white ml-auto"
+                  }`}
               >
                 {msg.content}
               </div>
