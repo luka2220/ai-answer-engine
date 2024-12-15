@@ -20,6 +20,7 @@ export async function POST(req: Request) {
     })
 
     const serverResponse = chatResponse.choices[0].message.content;
+    console.log(serverResponse);
 
     const response = new Response(JSON.stringify({ message: serverResponse }), { status: 200 })
     return response;

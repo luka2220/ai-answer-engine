@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Response from "./components/response";
 
 type Message = {
   role: "user" | "ai";
@@ -34,9 +35,12 @@ export default function Home() {
 
       // TODO: Handle the response from the chat API to display the AI response in the UI      
       const promptCompletion = await response.json()
-      console.log(promptCompletion.message);
+      // console.log(promptCompletion.message);
 
-      // setMessages();
+      setMessages((prev) => [
+        ...prev,
+        { role: "ai", content: promptCompletion.message }
+      ]);
 
 
 
@@ -46,7 +50,6 @@ export default function Home() {
       setIsLoading(false);
     }
   };
-
 
   // TODO: Modify the color schemes, fonts, and UI as needed for a good user experience
   // Refer to the Tailwind CSS docs here: https://tailwindcss.com/docs/customizing-colors, and here: https://tailwindcss.com/docs/hover-focus-and-other-states
@@ -76,7 +79,8 @@ export default function Home() {
                   : "bg-cyan-600 text-white ml-auto"
                   }`}
               >
-                {msg.content}
+                {/* Parse out any content in code or markdown... i.e ```go */}
+                <Response content={msg.content}/>
               </div>
             </div>
           ))}
