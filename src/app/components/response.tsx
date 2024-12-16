@@ -1,6 +1,6 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-
+import { dracula } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import ReactMarkdown from "react-markdown"
 
 type ResponseProps = {
     content: string;
@@ -21,13 +21,18 @@ export default function Response({ content }: ResponseProps) {
 
         return (
             <>
-                {textParts[0] && <p>{textParts[0]}</p>}
+                {textParts[0] && <ReactMarkdown>{textParts[0]}</ReactMarkdown>}
 
-                <SyntaxHighlighter language={language} style={atomDark}>
+                <br />
+
+                <SyntaxHighlighter language={language} style={dracula}>
                     {codeOnly}
                 </SyntaxHighlighter>
 
-                {textParts[1] && <p>{textParts[1]}</p>}
+
+                <br />
+
+                {textParts[1] && <ReactMarkdown>{textParts[1]}</ReactMarkdown>}
             </>
         );
     } else {
